@@ -2,6 +2,8 @@ import platform
 import socket
 import ipgetter2
 import speedtest
+import psutil
+
 
 
 # SYSTEM
@@ -16,7 +18,11 @@ def get_system_name():
 
 # NETWORK
 
+def get_network_name():
+    return None
+
 def get_local_ip():
+    """Return string with the internal IPv4"""
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
         # doesn't even have to be reachable
@@ -30,7 +36,7 @@ def get_local_ip():
 
 
 def get_external_ipv4():
-    """Return string with the IPv4
+    """Return string with the external IPv4
         Use get_external_ip to get IPv6 in first option and then IPv4"""
     a = ipgetter2.IPGetter()
     batch = ["https://v4.ipv6-test.com/api/myip.php", "https://api.ipify.org", "https://v4.ident.me/",
@@ -46,7 +52,7 @@ def get_external_ipv4():
 
 
 def get_external_ipv6():
-    """Return string with the IPv6
+    """Return string with the external IPv6
         Use get_external_ip to get IPv6 in first option and then IPv4"""
     a = ipgetter2.IPGetter()
     batch = ["https://v6.ipv6-test.com/api/myip.php", "https://api64.ipify.org", "https://v6.ident.me/",
@@ -86,6 +92,9 @@ def do_speedtest():
     results = s.results.dict()
     return results
 
+class Traffic:
+    def __init__(self):
+        self.cu
 
 class Speedtest:
 
@@ -130,4 +139,8 @@ if __name__ == '__main__':
     # print(s.get_download())
     # print(s.get_upload())
     # print(get_system_name())
-    pass
+    traffic = 0
+    while True:
+        traffic = get_live_traffic(traffic)
+        print(traffic)
+

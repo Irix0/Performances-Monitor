@@ -4,28 +4,28 @@ import platform
 
 
 
-def get_usage():
+def get_usage(interval=0.5):
     """Return a float representing the current system-wide CPU utilization as a percentage.
-        Interval = 1"""
-    return psutil.cpu_percent(interval=1)
+        Interval 0.5 as default"""
+    return psutil.cpu_percent(interval=interval)
 
 
-def get_user_usage():
+def get_user_usage(interval=0.5):
     """Provides utilization percentage for USER specific CPU time
-        Interval = 1"""
-    return psutil.cpu_times_percent(interval=1).user
+        Interval 0.5 as default"""
+    return psutil.cpu_times_percent(interval=interval).user
 
 
-def get_system_usage():
+def get_system_usage(interval=0.5):
     """Provides utilization percentage for SYSTEM specific CPU time
-        Interval = 1"""
-    return psutil.cpu_times_percent(interval=1).system
+        Interval 0.5 as default"""
+    return psutil.cpu_times_percent(interval=interval).system
 
 
-def get_idle_usage():
+def get_idle_usage(interval=0.5):
     """Provides utilization percentage for IDLE specific CPU time
-        Interval = 1"""
-    return psutil.cpu_times_percent(interval=1).idle
+        Interval 0.5 as default"""
+    return psutil.cpu_times_percent(interval=interval).idle
 
 
 def get_cpu_count():
@@ -77,4 +77,5 @@ if __name__ == '__main__':
     # print("CPU Freq: ", get_cpu_freq())
     # print(get_cpuinfo())
     # print(get_bits())
+
     pass
